@@ -15,9 +15,14 @@ find_library(LibSSH2 LibSSH2)
 include(FetchContent)
 
 # uSockets & uWebSockets
+if (NOT EXISTS ${CMAKE_BINARY_DIR}/uWebSockets)
+  execute_process(
+    COMMAND git clone --recurse https://github.com/uNetworking/uWebSockets.git
+  )
+endif()
 # Source code: https://github.com/uNetworking/uWebSockets/discussions/1218#discussioncomment-431071
-set(USOCKETS_DIR uWebSockets/uSockets/src)
-set(UWEBSOCKETS_DIR uWebSockets/src)
+set(USOCKETS_DIR ${CMAKE_BINARY_DIR}/uWebSockets/uSockets/src)
+set(UWEBSOCKETS_DIR ${CMAKE_BINARY_DIR}/uWebSockets/src)
 add_library(
   uSockets STATIC
   ${USOCKETS_DIR}/libusockets.h
