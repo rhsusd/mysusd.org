@@ -17,7 +17,7 @@ include(FetchContent)
 # uSockets & uWebSockets
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/uWebSockets)
   execute_process(
-    COMMAND git clone --recurse https://github.com/uNetworking/uWebSockets.git
+    COMMAND git clone --recurse-submodules https://github.com/uNetworking/uWebSockets.git
   )
 endif()
 # Source code: https://github.com/uNetworking/uWebSockets/discussions/1218#discussioncomment-431071
@@ -93,4 +93,4 @@ FetchContent_MakeAvailable(cpr)
 
 # main
 add_executable(main main.cpp)
-target_link_libraries(main PRIVATE cpr uWebSockets)
+target_link_libraries(main PRIVATE cpr::cpr uWebSockets)
